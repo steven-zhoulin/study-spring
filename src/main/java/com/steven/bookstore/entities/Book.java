@@ -3,6 +3,7 @@ package com.steven.bookstore.entities;
 
 import lombok.Getter;
 import lombok.Setter;
+import org.springframework.format.annotation.DateTimeFormat;
 
 import java.util.Date;
 
@@ -31,6 +32,7 @@ public class Book {
 	/**
 	 * 出版日期
 	 */
+    @DateTimeFormat(pattern="yyyy-MM-dd")
 	private Date publishDate;
 
 	public Book() {}

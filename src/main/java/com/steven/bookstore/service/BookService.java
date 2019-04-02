@@ -1,19 +1,19 @@
 package com.steven.bookstore.service;
 
+import com.steven.bookstore.dao.BookDAO;
 import com.steven.bookstore.entities.Book;
-import com.steven.bookstore.mapper.IBookDAO;
 import org.apache.commons.lang3.StringUtils;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import javax.annotation.Resource;
 import java.util.List;
 
 @Service
 public class BookService {
 
-    @Resource
-    IBookDAO bookDAO;
+    @Autowired
+    BookDAO bookDAO;
 
     public List<Book> getAllBooks() {
         return bookDAO.getAllBooks();
@@ -54,8 +54,8 @@ public class BookService {
         return rows;
     }
 
-    public int update(Book entity) {
-        return bookDAO.update(entity);
+    public int update(Book book) {
+        return bookDAO.update(book);
     }
 
 }

@@ -6,13 +6,13 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<link href="styles/main.css" type="text/css" rel="stylesheet" />
+<link href="/styles/main.css" type="text/css" rel="stylesheet" />
 <title>编辑图书</title>
 </head>
 <body>
 	<div class="main">
 		<h2 class="title"><span>编辑图书</span></h2>
-		<form action="BookController.do?act=EditBookPost" method="post">
+		<form action="/book/editPost" method="post">
 		<fieldset>
 		    <legend>图书</legend>
 		    <p>
@@ -35,7 +35,7 @@
 		</form>
 		<p style="color: red">${message}</p>
 		<p>
-		    <a href="BookController.do?act=ListBook" class="abtn">返回列表</a>
+		    <a href="/book/list" class="abtn">返回列表</a>
 		</p>
 	</div>
 </body>
