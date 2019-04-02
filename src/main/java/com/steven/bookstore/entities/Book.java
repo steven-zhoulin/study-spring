@@ -1,0 +1,45 @@
+package com.steven.bookstore.entities;
+
+
+import lombok.Getter;
+import lombok.Setter;
+
+import java.util.Date;
+
+/**
+ * 图书实体
+ */
+@Setter
+@Getter
+public class Book {
+
+	/**
+	 * 编号
+	 */
+	private int id;
+
+	/**
+	 * 书名
+	 */
+	private String title;
+
+	/**
+	 * 价格
+	 */
+	private double price;
+
+	/**
+	 * 出版日期
+	 */
+	private Date publishDate;
+
+	public Book() {}
+
+	public Book(int id, String title, double price, Date publishDate) {
+		this.id = id;
+		this.title = title;
+		this.price = price;
+		this.publishDate = publishDate;
+	}
+
+}
