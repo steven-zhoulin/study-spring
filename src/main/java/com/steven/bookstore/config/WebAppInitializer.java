@@ -23,6 +23,11 @@ public class WebAppInitializer extends AbstractAnnotationConfigDispatcherServlet
         return new String[] { "/" };
     }
 
+    /**
+     * 配置字符编码过滤器
+     *
+     * @return
+     */
     @Override
     protected Filter[] getServletFilters() {
         CharacterEncodingFilter characterEncodingFilter = new CharacterEncodingFilter();

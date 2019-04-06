@@ -14,11 +14,9 @@ public class BookDAO {
     @Autowired
     BookMapper bookMapper;
 
-
     public List<Book> getAllBooks() {
         return bookMapper.getAllBooks();
     }
-
 
     public Book getBookById(@Param("id") int id) {
         return bookMapper.getBookById(id);

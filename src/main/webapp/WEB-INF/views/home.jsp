@@ -4,8 +4,16 @@
 <!DOCTYPE html>
 <html>
 <head>
+
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-    <link href="/styles/main.css" type="text/css" rel="stylesheet" />
+    <%--<link href="/styles/main.css" type="text/css" rel="stylesheet" />--%>
+
+    <link rel="stylesheet" type="text/css" href="/plugins/jquery-easyui/themes/default/easyui.css" />
+    <link rel="stylesheet" type="text/css" href="/plugins/jquery-easyui/themes/icon.css" />
+    <link rel="stylesheet" type="text/css" href="/plugins/jquery-easyui/demo/demo.css" />
+    <script type="text/javascript" src="/plugins/jquery-easyui/jquery.easyui.min.js" />
+    <script type="text/javascript" src="/plugins/jquery-easyui/jquery.min.js" />
+
     <title>图书管理</title>
 </head>
 <body>
