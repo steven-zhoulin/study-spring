@@ -27,7 +27,7 @@ public class WebConfig extends WebMvcConfigurerAdapter {
     @Override
     public void addViewControllers(ViewControllerRegistry registry) {
         //registry.addRedirectViewController("/", "/book/list");
-        registry.addRedirectViewController("/", "/listBook.jsp");
+        registry.addRedirectViewController("/", "/main.jsp");
     }
 
 

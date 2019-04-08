@@ -1,10 +1,11 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
-<!DOCTYPE html>
+<%@ taglib prefix="c" uri="http://java.sun.com/jstl/core" %>
+<!DOCTYPE html PUBLIC "-//W3C//Dtd HTML 4.01 Transitional//EN">
 <html>
 <head>
 
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-    <title>图书管理</title>
+    <title>DevOps</title>
 
     <link rel="stylesheet" type="text/css" href="/plugins/jquery-easyui/themes/default/easyui.css"/>
     <link rel="stylesheet" type="text/css" href="/plugins/jquery-easyui/themes/icon.css"/>
@@ -12,26 +13,104 @@
 
     <script type="text/javascript" src="/plugins/jquery-easyui/jquery.min.js"></script>
     <script type="text/javascript" src="/plugins/jquery-easyui/jquery.easyui.min.js"></script>
+    <script type="text/javascript" src="/plugins/jquery-easyui/locale/easyui-lang-zh_CN.js"></script>
 
+    <script type="text/javascript">
+
+        function addTab(url, text, iconCls) {
+            var content = "<iframe frameborder=0 scrolling='auto' style='width:100%;height:100%' src='/views/" + url + "'></iframe>";
+            $("#tabs").tabs("add", {
+                title: text,
+                iconCls: iconCls,
+                closable: true,
+                content: content
+            });
+        }
+
+        function openTab(text, url, iconCls) {
+            if ($("#tabs").tabs("exists", text)) {
+                $("#tabs").tabs("close", text);
+                addTab(url, text, iconCls);
+                $("#tabs").tabs("select", text);
+            } else {
+                addTab(url, text, iconCls);
+            }
+        }
+
+        function logout() {
+            $.messager
+                .confirm(
+                    "系统提示",
+                    "您确定要退出系统吗",
+                    function (r) {
+                        if (r) {
+                            clearCookie();
+                        }
+                    });
+        }
+
+    </script>
 
 </head>
-<body>
 
-<div class="easyui-layout" style="width:100%;height:500px;">
-    <div data-options="region:'north'" style="height:78px"></div>
-    <div region="west" split="true" title="导航菜单" style="width:20%;">
-        <p style="padding:5px;margin:0;">Select language:</p>
-        <ul>
-            <li><a href="javascript:void(0)" onclick="showcontent('java')">Java</a></li>
-            <li><a href="javascript:void(0)" onclick="showcontent('cshape')">C#</a></li>
-            <li><a href="javascript:void(0)" onclick="showcontent('vb')">VB</a></li>
-            <li><a href="javascript:void(0)" onclick="showcontent('erlang')">Erlang</a></li>
-        </ul>
+<body class="easyui-layout">
+
+<div region="north" style="height:78px">
+    <a href="/user/logout">Logout</a>
+</div>
+
+<div region="west" title="导航菜单" split="true" style="width:18%;">
+    <p style="padding:5px;margin:0;">Select language:</p>
+    <ul>
+        <li><a href="javascript:void(0)" onclick="showcontent('java')">Java</a></li>
+        <li><a href="javascript:void(0)" onclick="showcontent('cshape')">C#</a></li>
+        <li><a href="javascript:void(0)" onclick="showcontent('vb')">VB</a></li>
+        <li><a href="javascript:void(0)" onclick="showcontent('erlang')">Erlang</a></li>
+    </ul>
+    <div class="easyui-accordion">
+        <div title="主机监控" data-options="iconCls:'icon-shujias'" style="padding:10px">
+            <a href="javascript:openTab('WEB主机监控','host-monitor.jsp?type=WEB','icon-host')" class="easyui-linkbutton"
+               data-options="plain:true,iconCls:'icon-host'" style="width: 150px;">WEB主机监控</a>
+            <a href="javascript:openTab('APP主机监控','host-monitor.jsp?type=APP','icon-host')" class="easyui-linkbutton"
+               data-options="plain:true,iconCls:'icon-host'" style="width: 150px;">APP主机监控</a>
+            <a href="javascript:openTab('CACHE主机监控','host-monitor.jsp?type=CACHE','icon-host')"
+               class="easyui-linkbutton" data-options="plain:true,iconCls:'icon-host'"
+               style="width: 150px;">CACHE主机监控</a>
+            <a href="javascript:openTab('SEARCH主机监控','host-monitor.jsp?type=SEARCH','icon-host')"
+               class="easyui-linkbutton" data-options="plain:true,iconCls:'icon-host'"
+               style="width: 150px;">SEARCH主机监控</a>
+            <a href="javascript:openTab('AEE主机监控','host-monitor.jsp?type=AEE','icon-host')" class="easyui-linkbutton"
+               data-options="plain:true,iconCls:'icon-host'" style="width: 150px;">AEE主机监控</a>
+            <a href="javascript:openTab('ZK主机监控','host-monitor.jsp?type=ZK','icon-host')" class="easyui-linkbutton"
+               data-options="plain:true,iconCls:'icon-host'" style="width: 150px;">ZK主机监控</a>
+            <a href="javascript:openTab('HDFS主机监控','host-monitor.jsp?type=HDFS','icon-shujia')"
+               class="easyui-linkbutton" data-options="plain:true,iconCls:'icon-shujia'"
+               style="width: 150px;">HDFS主机监控</a>
+        </div>
+        <div title="实例监控" data-options="iconCls:'icon-shujias'" style="padding:10px">
+            <a href="javascript:openTab('WEB实例监控','instance-monitor.jsp?type=WEB','icon-host')"
+               class="easyui-linkbutton" data-options="plain:true,iconCls:'icon-host'" style="width: 150px;">WEB实例监控</a>
+            <a href="javascript:openTab('APP实例监控','instance-monitor.jsp?type=APP','icon-host')"
+               class="easyui-linkbutton" data-options="plain:true,iconCls:'icon-host'" style="width: 150px;">APP实例监控</a>
+            <a href="javascript:openTab('CACHE实例监控','instance-monitor.jsp?type=CACHE','icon-host')"
+               class="easyui-linkbutton" data-options="plain:true,iconCls:'icon-host'"
+               style="width: 150px;">CACHE实例监控</a>
+            <a href="javascript:openTab('SEARCH实例监控','instance-monitor.jsp?type=SEARCH','icon-host')"
+               class="easyui-linkbutton" data-options="plain:true,iconCls:'icon-host'"
+               style="width: 150px;">SEARCH实例监控</a>
+            <a href="javascript:openTab('AEE实例监控','instance-monitor.jsp?type=AEE','icon-host')"
+               class="easyui-linkbutton" data-options="plain:true,iconCls:'icon-host'" style="width: 150px;">AEE实例监控</a>
+            <a href="javascript:openTab('ZK实例监控','instance-monitor.jsp?type=ZK','icon-host')" class="easyui-linkbutton"
+               data-options="plain:true,iconCls:'icon-host'" style="width: 150px;">ZK实例监控</a>
+            <a href="javascript:openTab('HDFS实例监控','instance-monitor.jsp?type=HDFS','icon-host')"
+               class="easyui-linkbutton" data-options="plain:true,iconCls:'icon-host'"
+               style="width: 150px;">HDFS实例监控</a>
+        </div>
     </div>
+</div>
 
-
-    <div id="content" region="center" class="easyui-tabs" style="width:80%;height:auto">
-
+<div region="center" style="margin:5px;">
+    <div class="easyui-tabs" fit="true" border="false" id="tabs">
         <div title="图书管理" data-options="closable:true" style="padding:10px">
             <table id="dg" title="图书管理" class="easyui-datagrid"
                    url="/book-rest/list"
@@ -76,7 +155,6 @@
                    onclick="javascript:$('#dlg').dialog('close')" style="width:90px">Cancel</a>
             </div>
         </div>
-
         <div title="About" data-options="closable:true" style="padding:10px">
             <p style="font-size:14px">jQuery EasyUI framework helps you build your web pages easily.</p>
             <ul>
@@ -97,9 +175,9 @@
         <div title="Help" data-options="iconCls:'icon-help',closable:true" style="padding:10px">
             This is the help content.
         </div>
-
-
     </div>
+
+
 </div>
 
 

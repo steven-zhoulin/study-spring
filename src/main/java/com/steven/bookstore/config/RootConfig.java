@@ -1,7 +1,9 @@
 package com.steven.bookstore.config;
 
 import com.steven.bookstore.mapper.BookMapper;
+import com.steven.bookstore.mapper.UserMapper;
 import org.apache.commons.dbcp.BasicDataSource;
+import org.apache.ibatis.session.SqlSessionFactory;
 import org.mybatis.spring.SqlSessionFactoryBean;
 import org.mybatis.spring.mapper.MapperFactoryBean;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -75,7 +77,7 @@ public class RootConfig {
     }
 
     @Bean
-    JdbcTemplate jdbcTemplate (DataSource dataSource) {
+    JdbcTemplate jdbcTemplate(DataSource dataSource) {
         JdbcTemplate jdbcTemplate = new JdbcTemplate(dataSource);
         return jdbcTemplate;
     }
@@ -90,11 +92,32 @@ public class RootConfig {
     SqlSessionFactoryBean sqlSessionFactoryBean(DataSource dataSource) {
         SqlSessionFactoryBean sqlSessionFactoryBean = new SqlSessionFactoryBean();
         sqlSessionFactoryBean.setDataSource(dataSource);
-        org.apache.ibatis.session.Configuration configuration = new org.apache.ibatis.session.Configuration() ;
+        org.apache.ibatis.session.Configuration configuration = new org.apache.ibatis.session.Configuration();
         sqlSessionFactoryBean.setConfiguration(configuration);
         return sqlSessionFactoryBean;
     }
 
+
+    private <T> MapperFactoryBean getMapper(SqlSessionFactoryBean sqlSessionFactoryBean, Class<T> mapperInterface) throws Exception {
+        MapperFactoryBean<T> mapperFactoryBean = new MapperFactoryBean<T>();
+
+        mapperFactoryBean.setSqlSessionFactory(sqlSessionFactoryBean.getObject());
+        mapperFactoryBean.setMapperInterface(mapperInterface);
+
+        return mapperFactoryBean;
+    }
+
+    @Bean
+    public MapperFactoryBean userMapper(SqlSessionFactoryBean sqlSessionFactoryBean) throws Exception {
+        return getMapper(sqlSessionFactoryBean, UserMapper.class);
+    }
+
+    @Bean
+    public MapperFactoryBean bookMapper(SqlSessionFactoryBean sqlSessionFactoryBean) throws Exception {
+        return getMapper(sqlSessionFactoryBean, BookMapper.class);
+    }
+
+    /*
     @Bean
     MapperFactoryBean<BookMapper> mapperFactoryBean(SqlSessionFactoryBean sqlSessionFactoryBean) throws Exception {
         MapperFactoryBean<BookMapper> mapperFactoryBean = new MapperFactoryBean<>();
@@ -103,6 +126,6 @@ public class RootConfig {
         mapperFactoryBean.setMapperInterface(BookMapper.class);
 
         return mapperFactoryBean;
-    }
+    }*/
 
 }

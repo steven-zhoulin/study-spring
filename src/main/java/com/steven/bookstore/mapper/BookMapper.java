@@ -9,16 +9,16 @@ import java.util.List;
 @Repository
 public interface BookMapper {
 
-    @Select("select id, title, price, publishDate from books")
+    @Select("select id, ip, price, publishDate from books")
     public List<Book> getAllBooks();
 
-    @Select("select id, title, price, publishDate from books where id=#{id}")
+    @Select("select id, ip, price, publishDate from books where id=#{id}")
     Book getBookById(@Param("id") int id);
 
     /**
      * 添加图书
      */
-    @Insert("insert into books(title, price, publishDate) values(#{title}, #{price}, #{publishDate})")
+    @Insert("insert into books(ip, price, publishDate) values(#{ip}, #{price}, #{publishDate})")
     public int add(Book entity);
 
     /**
@@ -30,7 +30,7 @@ public interface BookMapper {
     /**
      * 更新图书
      */
-    @Update("update books set title=#{title}, price=#{price}, publishDate=#{publishDate} where id=#{id}")
+    @Update("update books set ip=#{ip}, price=#{price}, publishDate=#{publishDate} where id=#{id}")
     public int update(Book entity);
 
 }
