@@ -68,6 +68,10 @@
         <li><a href="javascript:void(0)" onclick="showcontent('erlang')">Erlang</a></li>
     </ul>
     <div class="easyui-accordion">
+        <div title="系统管理" data-options="iconCls:'icon-shujias'" style="padding:10px">
+            <a href="javascript:openTab('用户管理','user.jsp','icon-host')" class="easyui-linkbutton"
+               data-options="plain:true,iconCls:'icon-host'" style="width: 150px;">用户管理</a>
+        </div>
         <div title="主机监控" data-options="iconCls:'icon-shujias'" style="padding:10px">
             <a href="javascript:openTab('WEB主机监控','host-monitor.jsp?type=WEB','icon-host')" class="easyui-linkbutton"
                data-options="plain:true,iconCls:'icon-host'" style="width: 150px;">WEB主机监控</a>
@@ -114,6 +118,7 @@
         <div title="图书管理" data-options="closable:true" style="padding:10px">
             <table id="dg" title="图书管理" class="easyui-datagrid"
                    url="/book-rest/list"
+                   method="get"
                    toolbar="#toolbar"
                    rownumbers="true" fitColumns="true" singleSelect="true">
                 <thead>
