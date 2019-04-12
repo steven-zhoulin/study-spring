@@ -1,6 +1,6 @@
-INSERT INTO `sys_users` VALUES('admin', 'admin', 1);
-INSERT INTO `sys_users` VALUES('guest', 'guest', 1);
-INSERT INTO `sys_users` VALUES('zhoulin', 'zhoulin', 1);
+INSERT INTO `sys_users` VALUES('admin', 'admin', '13007318123', 'zhoulin158@sohu.com', 1);
+INSERT INTO `sys_users` VALUES('guest', 'guest', '13000000000', 'guest@gmail.com', 1);
+INSERT INTO `sys_users` VALUES('zhoulin', 'zhoulin', '13787230000', 'tcaomsmail@gmail.com', 1);
 
 -- INSERT INTO `sys_authorities` VALUES(1, 'admin', 'admin_auth_1');
 -- INSERT INTO `sys_authorities` VALUES(2, 'admin', 'admin_auth_2');

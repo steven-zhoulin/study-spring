@@ -5,7 +5,7 @@
 <head>
 
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-    <title>DevOps</title>
+    <title>Demo</title>
 
     <link rel="stylesheet" type="text/css" href="/plugins/jquery-easyui/themes/default/easyui.css"/>
     <link rel="stylesheet" type="text/css" href="/plugins/jquery-easyui/themes/icon.css"/>
@@ -60,106 +60,13 @@
 </div>
 
 <div region="west" title="导航菜单" split="true" style="width:18%;">
-    <p style="padding:5px;margin:0;">Select language:</p>
-    <ul>
-        <li><a href="javascript:void(0)" onclick="showcontent('java')">Java</a></li>
-        <li><a href="javascript:void(0)" onclick="showcontent('cshape')">C#</a></li>
-        <li><a href="javascript:void(0)" onclick="showcontent('vb')">VB</a></li>
-        <li><a href="javascript:void(0)" onclick="showcontent('erlang')">Erlang</a></li>
+    <ul id="menu-tree" class="easyui-tree">
+        // 菜单树
     </ul>
-    <div class="easyui-accordion">
-        <div title="系统管理" data-options="iconCls:'icon-shujias'" style="padding:10px">
-            <a href="javascript:openTab('用户管理','user.jsp','icon-host')" class="easyui-linkbutton"
-               data-options="plain:true,iconCls:'icon-host'" style="width: 150px;">用户管理</a>
-        </div>
-        <div title="主机监控" data-options="iconCls:'icon-shujias'" style="padding:10px">
-            <a href="javascript:openTab('WEB主机监控','host-monitor.jsp?type=WEB','icon-host')" class="easyui-linkbutton"
-               data-options="plain:true,iconCls:'icon-host'" style="width: 150px;">WEB主机监控</a>
-            <a href="javascript:openTab('APP主机监控','host-monitor.jsp?type=APP','icon-host')" class="easyui-linkbutton"
-               data-options="plain:true,iconCls:'icon-host'" style="width: 150px;">APP主机监控</a>
-            <a href="javascript:openTab('CACHE主机监控','host-monitor.jsp?type=CACHE','icon-host')"
-               class="easyui-linkbutton" data-options="plain:true,iconCls:'icon-host'"
-               style="width: 150px;">CACHE主机监控</a>
-            <a href="javascript:openTab('SEARCH主机监控','host-monitor.jsp?type=SEARCH','icon-host')"
-               class="easyui-linkbutton" data-options="plain:true,iconCls:'icon-host'"
-               style="width: 150px;">SEARCH主机监控</a>
-            <a href="javascript:openTab('AEE主机监控','host-monitor.jsp?type=AEE','icon-host')" class="easyui-linkbutton"
-               data-options="plain:true,iconCls:'icon-host'" style="width: 150px;">AEE主机监控</a>
-            <a href="javascript:openTab('ZK主机监控','host-monitor.jsp?type=ZK','icon-host')" class="easyui-linkbutton"
-               data-options="plain:true,iconCls:'icon-host'" style="width: 150px;">ZK主机监控</a>
-            <a href="javascript:openTab('HDFS主机监控','host-monitor.jsp?type=HDFS','icon-shujia')"
-               class="easyui-linkbutton" data-options="plain:true,iconCls:'icon-shujia'"
-               style="width: 150px;">HDFS主机监控</a>
-        </div>
-        <div title="实例监控" data-options="iconCls:'icon-shujias'" style="padding:10px">
-            <a href="javascript:openTab('WEB实例监控','instance-monitor.jsp?type=WEB','icon-host')"
-               class="easyui-linkbutton" data-options="plain:true,iconCls:'icon-host'" style="width: 150px;">WEB实例监控</a>
-            <a href="javascript:openTab('APP实例监控','instance-monitor.jsp?type=APP','icon-host')"
-               class="easyui-linkbutton" data-options="plain:true,iconCls:'icon-host'" style="width: 150px;">APP实例监控</a>
-            <a href="javascript:openTab('CACHE实例监控','instance-monitor.jsp?type=CACHE','icon-host')"
-               class="easyui-linkbutton" data-options="plain:true,iconCls:'icon-host'"
-               style="width: 150px;">CACHE实例监控</a>
-            <a href="javascript:openTab('SEARCH实例监控','instance-monitor.jsp?type=SEARCH','icon-host')"
-               class="easyui-linkbutton" data-options="plain:true,iconCls:'icon-host'"
-               style="width: 150px;">SEARCH实例监控</a>
-            <a href="javascript:openTab('AEE实例监控','instance-monitor.jsp?type=AEE','icon-host')"
-               class="easyui-linkbutton" data-options="plain:true,iconCls:'icon-host'" style="width: 150px;">AEE实例监控</a>
-            <a href="javascript:openTab('ZK实例监控','instance-monitor.jsp?type=ZK','icon-host')" class="easyui-linkbutton"
-               data-options="plain:true,iconCls:'icon-host'" style="width: 150px;">ZK实例监控</a>
-            <a href="javascript:openTab('HDFS实例监控','instance-monitor.jsp?type=HDFS','icon-host')"
-               class="easyui-linkbutton" data-options="plain:true,iconCls:'icon-host'"
-               style="width: 150px;">HDFS实例监控</a>
-        </div>
-    </div>
 </div>
 
 <div region="center" style="margin:5px;">
     <div class="easyui-tabs" fit="true" border="false" id="tabs">
-        <div title="图书管理" data-options="closable:true" style="padding:10px">
-            <table id="dg" title="图书管理" class="easyui-datagrid"
-                   url="/book-rest/list"
-                   method="get"
-                   toolbar="#toolbar"
-                   rownumbers="true" fitColumns="true" singleSelect="true">
-                <thead>
-                <tr>
-                    <th field="id" width="15">编号</th>
-                    <th field="title" width="100">书名</th>
-                    <th field="price" width="20">价格</th>
-                    <th field="publishDate" width="50">出版日期</th>
-                </tr>
-                </thead>
-            </table>
-
-            <div id="toolbar">
-                <a href="#" class="easyui-linkbutton" iconCls="icon-add" plain="true" onclick="addBook()">新增书籍</a>
-                <a href="#" class="easyui-linkbutton" iconCls="icon-edit" plain="true" onclick="editBook()">编辑书籍</a>
-                <a href="#" class="easyui-linkbutton" iconCls="icon-remove" plain="true" onclick="deleteBook()">删除书籍</a>
-            </div>
-
-            <div id="dlg" class="easyui-dialog" style="width:400px"
-                 data-options="closed:true,modal:true,border:'thin',buttons:'#dlg-buttons'">
-                <form id="fm" method="post" novalidate style="margin:0;padding:20px 50px">
-                    <h3>书籍信息</h3>
-                    <div style="margin-bottom:10px">
-                        <input name="title" class="easyui-textbox" required="true" label="书名:" style="width:100%">
-                    </div>
-                    <div style="margin-bottom:10px">
-                        <input name="price" class="easyui-textbox" required="true" label="价格:" style="width:100%">
-                    </div>
-                    <div style="margin-bottom:10px">
-                        <input name="publishDate" class="easyui-datebox" required="true" label="出版时间:"
-                               style="width:100%" data-options="formatter:myformatter,parser:myparser">
-                    </div>
-                </form>
-            </div>
-            <div id="dlg-buttons">
-                <a href="javascript:void(0)" class="easyui-linkbutton c6" iconCls="icon-ok" onclick="saveBook()"
-                   style="width:90px">Save</a>
-                <a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-cancel"
-                   onclick="javascript:$('#dlg').dialog('close')" style="width:90px">Cancel</a>
-            </div>
-        </div>
         <div title="About" data-options="closable:true" style="padding:10px">
             <p style="font-size:14px">jQuery EasyUI framework helps you build your web pages easily.</p>
             <ul>
@@ -174,9 +81,6 @@
                 <li>easyui is very easy but powerful.</li>
             </ul>
         </div>
-        <div title="My Documents" data-options="closable:true" style="padding:10px">
-            <ul class="easyui-tree" data-options="url:'tree_data1.json',method:'get',animate:true"></ul>
-        </div>
         <div title="Help" data-options="iconCls:'icon-help',closable:true" style="padding:10px">
             This is the help content.
         </div>
@@ -185,8 +89,18 @@
 
 </div>
 
-
 <script type="text/javascript">
+
+    $(function () {
+        $('#menu-tree').tree({
+            url: '/system/menu/tree',
+            lines: true,
+            onClick : function(node) {
+                openTab(node.text, node.url);
+            }
+        });
+    });
+
     var url;
 
     function addBook() {
