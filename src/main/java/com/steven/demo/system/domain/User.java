@@ -7,6 +7,7 @@ import org.apache.commons.lang3.builder.ToStringBuilder;
 import java.io.Serializable;
 import java.sql.Timestamp;
 import java.util.Date;
+import java.util.Set;
 
 /**
  * @author
@@ -26,9 +27,12 @@ public class User implements Serializable {
     private String password;
     private Timestamp createTime;
     private Date lastPasswordResetTime;
-//    private Set<Role> roles;
+    private Set<Role> roles;
     private Job job;
     private Dept dept;
+
+    private Long deptId;
+    private Long jobId;
 
     @Override
     public String toString() {

@@ -1,6 +1,5 @@
 package com.steven.demo.system.mapper;
 
-import com.steven.demo.system.domain.Dept;
 import com.steven.demo.system.domain.Job;
 import org.apache.ibatis.annotations.Delete;
 import org.apache.ibatis.annotations.Insert;
@@ -17,10 +16,13 @@ import java.util.List;
 public interface JobMapper {
 
     @Select("select id, name, enabled, create_time, sort, dept_id from job")
-    List<Dept> findAll();
+    List<Job> findAll();
 
     @Select("select id, name, enabled, create_time, sort, dept_id from job where id = #{job_id}")
     Job findOne(String job_id);
+
+    @Select("select id, name, enabled, create_time, sort, dept_id from job where dept_id = #{dept_id}")
+    List<Job> findByDeptId(String dept_id);
 
     @Insert("insert into job(name, pid, create_time, enabled) values(#{name}, #{pid}, now(), #{enabled})")
     public int add(Job job);

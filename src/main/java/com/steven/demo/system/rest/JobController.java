@@ -1,12 +1,10 @@
 package com.steven.demo.system.rest;
 
-import com.steven.demo.system.domain.Dept;
+import com.steven.demo.system.domain.Job;
+import com.steven.demo.system.service.DeptService;
 import com.steven.demo.system.service.JobService;
-import com.steven.demo.system.util.TreeNode;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -17,20 +15,20 @@ public class JobController {
     @Autowired
     private JobService jobService;
 
-    @RequestMapping(value = "/tree")
-    public List<TreeNode> getDeptTree() {
-        List<TreeNode> tree = jobService.getDeptTree();
-        return tree;
-    }
-
     @RequestMapping(value = "/list")
-    public List<Dept> findAll() {
-        List<Dept> depts = jobService.findAll();
-        return depts;
+    public List<Job> findAll() {
+        List<Job> jobs = jobService.findAll();
+        return jobs;
     }
 
     @RequestMapping(value = "/{id}")
-    public Dept findOne(@PathVariable("id") String id) {
+    public Job findOne(@PathVariable("id") String id) {
         return jobService.findOne(id);
+    }
+
+    @RequestMapping(value = "", method = RequestMethod.GET)
+    public List<Job> findByDeptId(@RequestParam(value = "deptId", required = false) String deptId) {
+        List<Job> jobs = jobService.findByDeptId(deptId);
+        return jobs;
     }
 }

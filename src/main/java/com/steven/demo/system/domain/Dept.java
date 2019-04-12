@@ -6,6 +6,7 @@ import org.apache.commons.lang3.builder.ToStringBuilder;
 
 import java.io.Serializable;
 import java.sql.Timestamp;
+import java.util.Set;
 
 /**
  * @author
@@ -20,7 +21,7 @@ public class Dept implements Serializable {
     private Boolean enabled;
     private Long pid;
     private Timestamp createTime;
-    //private Set<Role> roles;
+    private Set<Role> roles;
 
     @Override
     public String toString() {

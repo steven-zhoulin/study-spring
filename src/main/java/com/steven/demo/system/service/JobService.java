@@ -1,13 +1,10 @@
 package com.steven.demo.system.service;
 
-import com.steven.demo.system.dao.DeptDAO;
-import com.steven.demo.system.domain.Dept;
-import com.steven.demo.system.util.TreeNode;
-import com.steven.demo.system.util.TreeUtil;
+import com.steven.demo.system.dao.JobDAO;
+import com.steven.demo.system.domain.Job;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -17,48 +14,30 @@ import java.util.List;
 public class JobService {
 
     @Autowired
-    DeptDAO deptDAO;
+    JobDAO jobDAO;
 
-    public List<Dept> findAll() {
-        return deptDAO.findAll();
+    public List<Job> findAll() {
+        return jobDAO.findAll();
     }
 
-    public Dept findOne(String dept_id) {
-        return deptDAO.findOne(dept_id);
+    public Job findOne(String deptId) {
+        return jobDAO.findOne(deptId);
     }
 
-    public List<TreeNode> getDeptTree() {
-        List<Dept> deptList = findAll();
-        List<TreeNode> nodeList = transform(deptList);
-        List<TreeNode> tree = TreeUtil.getRootNode(nodeList);
-        return tree;
+    public List<Job> findByDeptId(String deptId) {
+        return jobDAO.findByDeptId(deptId);
     }
 
-    private List<TreeNode> transform(List<Dept> deptList) {
-        List<TreeNode> nodeList = new ArrayList<>();
-
-        for (Dept dept : deptList) {
-            TreeNode treeNode = new TreeNode();
-            treeNode.setId(String.valueOf(dept.getId()));
-            treeNode.setPid(String.valueOf(dept.getPid()));
-            treeNode.setText(dept.getName());
-
-            nodeList.add(treeNode);
-        }
-
-        return nodeList;
-    }
-
-    public int add(Dept dept) {
-        return deptDAO.add(dept);
+    public int add(Job job) {
+        return jobDAO.add(job);
     }
 
     public int delete(String id) {
-        return deptDAO.delete(id);
+        return jobDAO.delete(id);
     }
 
-    public int update(Dept dept) {
-        return deptDAO.update(dept);
+    public int update(Job job) {
+        return jobDAO.update(job);
     }
 
 }

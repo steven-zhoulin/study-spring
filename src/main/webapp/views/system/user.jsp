@@ -16,9 +16,23 @@
     <script type="text/javascript" src="/plugins/jquery-easyui/jquery.easyui.min.js"></script>
     <script type="text/javascript" src="/plugins/jquery-easyui/locale/easyui-lang-zh_CN.js"></script>
     <script type="text/javascript">
+
         $(function () {
             $('#dept-tree').tree({
                 url: '/system/dept/tree'
+            });
+            $('#deptId').combotree({
+                onClick: function(node) {
+                    alert("text: " + node.text + ", id: " + node.id);
+                    $.get("/system/job", {deptId : node.id}, function(result) {
+                        $('#jobId').combobox({
+                            data:result,
+                            valueField:'id',
+                            textField:'name'
+                        })
+                    });
+
+                }
             });
         });
 
@@ -41,7 +55,7 @@
                 } else {
                     $("#select_id ").val(false);
                 }
-                url = '/system/user/' + row.userId + '?_method=put';
+                url = '/system/user/' + row.id + '?_method=put';
             }
         }
 
@@ -50,7 +64,7 @@
             if (row) {
                 $.messager.confirm('Confirm', '确认删除?', function (r) {
                     if (r) {
-                        $.post('/system/user/' + row.userId + '?_method=delete', function (result) {
+                        $.post('/system/user/' + row.id + '?_method=delete', function (result) {
                             if (result.success) {
                                 $('#dg').datagrid('reload');	// reload the user data
                             } else {
@@ -120,6 +134,14 @@
             return year + "-" + month + "-" + day + " " + hour + ":" + minutes + ":" + seconds;
         }
 
+        function formatDept(val) {
+            return val.name;
+        }
+
+        function formatJob(val) {
+            return val.name;
+        }
+
     </script>
 
 </head>
@@ -138,11 +160,14 @@
            rownumbers="true" fitColumns="true" singleSelect="true">
         <thead>
         <tr>
+            <th field="id">用户ID</th>
             <th field="username">用户名</th>
             <th field="phone">手机号码</th>
             <th field="email">电子邮箱</th>
             <th field="enabled" formatter="formatEnabled" align='center' halign='center'>状态</th>
             <th field="createTime" formatter="formatDate" align='center' halign='center'>创建日期</th>
+            <th field="dept" formatter="formatDept">部门</th>
+            <th field="job" formatter="formatJob">岗位</th>
         </tr>
         </thead>
     </table>
@@ -158,7 +183,7 @@
         <form id="fm" method="post" novalidate style="margin:0;padding:20px 50px">
             <h3>用户信息</h3>
             <div style="margin-bottom:10px">
-                <input name="userName" class="easyui-textbox" required="true" label="用户名:" style="width:100%">
+                <input name="username" class="easyui-textbox" required="true" label="用户名:" style="width:100%">
             </div>
             <div style="margin-bottom:10px">
                 <input name="phone" class="easyui-textbox" label="手机号码:" style="width:100%">
@@ -167,19 +192,19 @@
                 <input name="email" class="easyui-textbox" label="电子邮箱:" style="width:100%" validType="email">
             </div>
             <div style="margin-bottom:10px">
-                <input name="deptId" class="easyui-textbox" required="true" label="部门:" style="width:100%">
+                <select id="deptId" name="deptId" class="easyui-combotree" label="部门:" style="width:100%;" data-options="url:'/system/dept/tree',required:true"></select>
             </div>
             <div style="margin-bottom:10px">
-                <input name="jobId" class="easyui-textbox" required="true" label="岗位:" style="width:100%">
+                <select id="jobId" name="jobId" class="easyui-combobox" label="岗位:" style="width:100%;"></select>
+            </div>
+            <%--<div style="margin-bottom:10px">--%>
+                <%--<input name="roleId" class="easyui-textbox" required="true" label="角色:" style="width:100%">--%>
+            <%--</div>--%>
+            <div style="margin-bottom:10px">
+                <input name="enabled" class="easyui-radiobutton" value="true" checked label="激活:">
             </div>
             <div style="margin-bottom:10px">
-                <input name="roleId" class="easyui-textbox" required="true" label="角色:" style="width:100%">
-            </div>
-            <div style="margin-bottom:10px">
-                <input class="easyui-radiobutton" name="enabled" value="true" checked label="激活:">
-            </div>
-            <div style="margin-bottom:10px">
-                <input class="easyui-radiobutton" name="enabled" value="false" label="冻结:">
+                <input name="enabled" class="easyui-radiobutton" value="false" label="冻结:">
             </div>
 
         </form>

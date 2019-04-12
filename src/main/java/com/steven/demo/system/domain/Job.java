@@ -19,7 +19,7 @@ public class Job implements Serializable {
     private String name;
     private Long sort;
     private Boolean enabled;
-    //private Dept dept;
+    private Dept dept;
     private Timestamp createTime;
 
     @Override

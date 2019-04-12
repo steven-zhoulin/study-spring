@@ -1,7 +1,7 @@
 package com.steven.demo.system.rest;
 
 import com.steven.demo.system.domain.Dept;
-import com.steven.demo.system.service.JobService;
+import com.steven.demo.system.service.DeptService;
 import com.steven.demo.system.util.TreeNode;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -15,7 +15,7 @@ import java.util.List;
 public class DeptController {
 
     @Autowired
-    private JobService deptService;
+    private DeptService deptService;
 
     @RequestMapping(value = "/tree")
     public List<TreeNode> getDeptTree() {

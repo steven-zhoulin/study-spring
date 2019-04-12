@@ -17,12 +17,16 @@ public class JobDAO {
     @Autowired
     JobMapper jobMapper;
 
-    public List<Dept> findAll() {
+    public List<Job> findAll() {
         return jobMapper.findAll();
     }
 
     public Job findOne(String job_id) {
         return jobMapper.findOne(job_id);
+    }
+
+    public List<Job> findByDeptId(String deptId) {
+        return jobMapper.findByDeptId(deptId);
     }
 
     public int add(Job job) {
